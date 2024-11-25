@@ -1,4 +1,4 @@
-package com.example.valifytask
+package com.example.valifytask.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -7,10 +7,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
+import com.example.valifytask.navigation.AppNavHost
 import com.example.valifytask.ui.theme.ValifyTaskTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -22,25 +21,12 @@ class MainActivity : ComponentActivity() {
         setContent {
             ValifyTaskTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                     Greeting("Android ", modifier = Modifier.padding(innerPadding))
+                    AppNavHost(
+                        modifier = Modifier.padding(innerPadding),
+                        navController = rememberNavController()
+                    )
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    ValifyTaskTheme {
-        Greeting("Android")
     }
 }
