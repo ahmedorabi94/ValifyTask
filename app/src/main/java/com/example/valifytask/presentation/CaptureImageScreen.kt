@@ -1,6 +1,8 @@
 package com.example.valifytask.presentation
 
 import android.app.Activity
+import android.content.Context
+import android.graphics.Bitmap
 import android.net.Uri
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
@@ -10,9 +12,9 @@ import androidx.camera.view.PreviewView
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -30,6 +32,7 @@ import androidx.navigation.NavHostController
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.face.FaceDetection
 import com.google.mlkit.vision.face.FaceDetectorOptions
+import kotlinx.coroutines.delay
 import timber.log.Timber
 import java.io.File
 
@@ -41,20 +44,33 @@ fun CaptureImageScreen(
     registerViewModel: RegisterViewModel = hiltViewModel()
 ) {
 
+    val closeApp = registerViewModel.closeApp.collectAsStateWithLifecycle().value
+
+    val isSmiling = remember { mutableStateOf(false) }
+
+    val context = LocalContext.current
+    val lifecycleOwner = LocalLifecycleOwner.current
+    val imageCapture = remember { ImageCapture.Builder().build() }
+
+
+
+    LaunchedEffect(Unit) {
+        while (true) {
+            delay(1000L) // Delay for 1 second
+            takePicture(context, imageCapture) { bitmap ->
+                isSmiling.value = true
+                registerViewModel.bitmapToByteArray(bitmap)
+            }
+
+        }
+    }
 
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
 
-        val closeApp = registerViewModel.closeApp.collectAsStateWithLifecycle().value
 
-        val isSmiling = remember { mutableStateOf(false) }
-
-        val context = LocalContext.current
-        val lifecycleOwner = LocalLifecycleOwner.current
-        val imageCapture = remember { ImageCapture.Builder().build() }
-
-        if (closeApp){
+        if (closeApp) {
             (context as? Activity)?.finish()
         }
         AndroidView(
@@ -79,35 +95,6 @@ fun CaptureImageScreen(
             modifier = Modifier.fillMaxSize()
         )
 
-
-        Button(
-            onClick = {
-                val file = File(context.cacheDir, "captured_image.jpg")
-                val outputOptions = ImageCapture.OutputFileOptions.Builder(file).build()
-                imageCapture.takePicture(outputOptions, ContextCompat.getMainExecutor(context),
-                    object : ImageCapture.OnImageSavedCallback {
-                        override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
-                            val image = InputImage.fromFilePath(context, Uri.fromFile(file))
-                            detectSmile(image) { smileDetected ->
-                                isSmiling.value = smileDetected
-                                if (smileDetected){
-                                    registerViewModel.bitmapToByteArray(image.bitmapInternal!!)
-
-                                }
-                            }
-                        }
-
-                        override fun onError(exception: ImageCaptureException) {
-                            Timber.e("Error capturing image: ${exception.message}")
-                        }
-                    })
-            },
-            modifier = Modifier.align(Alignment.BottomCenter)
-
-        ) {
-            Text("Capture")
-        }
-
         Text(
             text = if (isSmiling.value) "You're smiling! 😊" else "No smile detected.",
             modifier = Modifier
@@ -117,6 +104,31 @@ fun CaptureImageScreen(
         )
     }
 }
+
+fun takePicture(context: Context, imageCapture: ImageCapture, saveImage: (Bitmap) -> Unit) {
+
+    val file = File(context.cacheDir, "captured_image.jpg")
+    val outputOptions = ImageCapture.OutputFileOptions.Builder(file).build()
+    imageCapture.takePicture(outputOptions, ContextCompat.getMainExecutor(context),
+        object : ImageCapture.OnImageSavedCallback {
+            override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
+                Timber.e("onImageSaved")
+                val image = InputImage.fromFilePath(context, Uri.fromFile(file))
+                detectSmile(image) { smileDetected ->
+                    Timber.e("detectSmile")
+                    if (smileDetected) {
+                        Timber.e("smileDetected")
+                        saveImage.invoke(image.bitmapInternal!!)
+                    }
+                }
+            }
+
+            override fun onError(exception: ImageCaptureException) {
+                Timber.e("Error capturing image: ${exception.message}")
+            }
+        })
+}
+
 
 fun detectSmile(image: InputImage, onResult: (Boolean) -> Unit) {
     val options = FaceDetectorOptions.Builder()
