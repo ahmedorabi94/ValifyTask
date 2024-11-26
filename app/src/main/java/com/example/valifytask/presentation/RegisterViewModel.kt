@@ -13,6 +13,7 @@ import com.example.valifytask.validation.ValidatePassword
 import com.example.valifytask.validation.ValidatePhone
 import com.example.valifytask.validation.ValidateUserName
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.io.ByteArrayOutputStream
@@ -37,6 +38,13 @@ class RegisterViewModel @Inject constructor(
     private val validateEmail  = ValidateEmail()
     private val validatePhone = ValidatePhone()
 
+    var closeApp = MutableStateFlow(false)
+    //var navigateToCameraScreen = MutableStateFlow(false)
+
+    fun resetData(){
+     //   navigateToCameraScreen.value = false
+        closeApp.value = false
+    }
 
     fun saveData() : Boolean{
 
@@ -67,6 +75,7 @@ class RegisterViewModel @Inject constructor(
         viewModelScope.launch {
             val userInfo = UserInfo(userName = state.userName, email = state.email , phoneNumber = state.phoneNumber)
             addUserInfoUseCase.execute(userInfo)
+           // navigateToCameraScreen.value = true
         }
 
     }
@@ -80,6 +89,7 @@ class RegisterViewModel @Inject constructor(
 
            val id =  updateUserInfoUseCase.execute(userItem)
             Timber.e("update id $id")
+            closeApp.value = true
         }
 
     }

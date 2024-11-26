@@ -1,5 +1,6 @@
 package com.example.valifytask.presentation
 
+import android.app.Activity
 import android.net.Uri
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
@@ -24,6 +25,7 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.face.FaceDetection
@@ -44,12 +46,17 @@ fun CaptureImageScreen(
         modifier = Modifier.fillMaxSize()
     ) {
 
+        val closeApp = registerViewModel.closeApp.collectAsStateWithLifecycle().value
+
         val isSmiling = remember { mutableStateOf(false) }
 
         val context = LocalContext.current
         val lifecycleOwner = LocalLifecycleOwner.current
         val imageCapture = remember { ImageCapture.Builder().build() }
 
+        if (closeApp){
+            (context as? Activity)?.finish()
+        }
         AndroidView(
             factory = { ctx ->
                 val previewView = PreviewView(ctx)
@@ -57,7 +64,7 @@ fun CaptureImageScreen(
                 cameraProviderFuture.addListener({
                     val cameraProvider = cameraProviderFuture.get()
                     val preview = androidx.camera.core.Preview.Builder().build().also {
-                        it.setSurfaceProvider(previewView.surfaceProvider)
+                        it.surfaceProvider = previewView.surfaceProvider
                     }
                     val cameraSelector = CameraSelector.DEFAULT_FRONT_CAMERA
                     cameraProvider.bindToLifecycle(
@@ -85,6 +92,7 @@ fun CaptureImageScreen(
                                 isSmiling.value = smileDetected
                                 if (smileDetected){
                                     registerViewModel.bitmapToByteArray(image.bitmapInternal!!)
+
                                 }
                             }
                         }
@@ -120,7 +128,7 @@ fun detectSmile(image: InputImage, onResult: (Boolean) -> Unit) {
     val detector = FaceDetection.getClient(options)
     detector.process(image)
         .addOnSuccessListener { faces ->
-            val isSmiling = faces.any { it.smilingProbability ?: 0f > 0.5f }
+            val isSmiling = faces.any { (it.smilingProbability ?: 0f) > 0.5f }
             onResult(isSmiling)
         }
         .addOnFailureListener { e ->

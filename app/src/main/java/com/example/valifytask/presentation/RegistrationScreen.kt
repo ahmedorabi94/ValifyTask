@@ -1,5 +1,9 @@
 package com.example.valifytask.presentation
 
+import android.Manifest
+import android.content.pm.PackageManager
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -19,11 +23,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.valifytask.navigation.NavigationItem
@@ -38,6 +44,9 @@ fun RegistrationScreen(
 ) {
 
     val localFocusManager = LocalFocusManager.current
+    val context = LocalContext.current
+
+    //val navigateToCameraScreen = registerViewModel.navigateToCameraScreen.collectAsStateWithLifecycle().value
 
 
     val usernameMutable = remember { mutableStateOf("") }
@@ -50,13 +59,31 @@ fun RegistrationScreen(
     val phoneErrorMutable = remember { mutableStateOf("") }
     val passwordErrorMutable = remember { mutableStateOf("") }
 
+    val permission = Manifest.permission.CAMERA
+    val isPermissionGranted =  remember { mutableStateOf(false) }
+    val permissionLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) {isGranted ->
+        isPermissionGranted.value = isGranted
+        if (isGranted){
+            registerViewModel.addUserInfo()
+            navController?.navigate(NavigationItem.CaptureImage.route)
+        }
+    }
+
+    isPermissionGranted.value = ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED
+
+
+//    if (navigateToCameraScreen){
+//       navController?.navigate(NavigationItem.CaptureImage.route)
+//       // registerViewModel.resetData()
+//    }
 
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(color = Color.Black)
     ) {
-
 
         Spacer(Modifier.height(20.dp))
         CustomTextField(
@@ -120,10 +147,15 @@ fun RegistrationScreen(
                         passwordErrorMutable.value = registerViewModel.state.passwordError ?: ""
                     else passwordErrorMutable.value = ""
                 } else {
-                    registerViewModel.addUserInfo()
-                    navController?.navigate(NavigationItem.CaptureImage.route)
-                }
 
+                    if (!isPermissionGranted.value) {
+                        permissionLauncher.launch(permission)
+                    } else {
+                        registerViewModel.addUserInfo()
+                         navController?.navigate(NavigationItem.CaptureImage.route)
+                    }
+
+                }
 
             },
             shape = RoundedCornerShape(14.dp),
@@ -144,6 +176,8 @@ fun RegistrationScreen(
                 fontSize = 16.sp, modifier = Modifier
             )
         }
+
+
     }
 
 }
