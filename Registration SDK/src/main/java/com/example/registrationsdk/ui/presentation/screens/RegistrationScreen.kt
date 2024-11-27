@@ -74,10 +74,6 @@ fun RegistrationScreen(
     isPermissionGranted.value = ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED
 
 
-//    if (navigateToCameraScreen){
-//       navController?.navigate(NavigationItem.CaptureImage.route)
-//       // registerViewModel.resetData()
-//    }
 
     Column(
         modifier = Modifier

@@ -38,7 +38,7 @@ interface UserInfoDao {
     @Transaction
     suspend fun insertOrUpdate(items: List<UserInfo>) {
         items.forEach {model ->
-            val list = getItemById(model.userName ?: "")
+            val list = getItemById(model.userName)
             if (list.isEmpty()){
                 insertUserInfo(model)
             }else{

@@ -57,7 +57,7 @@ fun CaptureImageScreen(
 
     LaunchedEffect(Unit) {
         while (true) {
-            delay(1000L) // Delay for 1 second
+            delay(1000L)
             takePicture(context, imageCapture) { bitmap ->
                 isSmiling.value = true
                 registerViewModel.bitmapToByteArray(bitmap)

@@ -24,29 +24,19 @@ class RegisterViewModel @Inject constructor(
     private val addUserInfoUseCase: AddUserInfoUseCase,
     private val updateUserInfoUseCase: UpdateUserInfoUseCase,
     private val getLastUserInfoUseCase: GetLastUserInfoUseCase,
-): ViewModel(){
+) : ViewModel() {
 
 
     var state = RegisterScreenState()
 
-   // var useInfo = UserInfo(userName = "", email = "",  phoneNumber = "")
-    //val hasError = MutableStateFlow<Boolean>(false)
-
-
     private val validatePassword = ValidatePassword()
     private val validateUserName: ValidateUserName = ValidateUserName()
-    private val validateEmail  = ValidateEmail()
+    private val validateEmail = ValidateEmail()
     private val validatePhone = ValidatePhone()
 
     var closeApp = MutableStateFlow(false)
-    //var navigateToCameraScreen = MutableStateFlow(false)
 
-    fun resetData(){
-     //   navigateToCameraScreen.value = false
-        closeApp.value = false
-    }
-
-    fun saveData() : Boolean{
+    fun saveData(): Boolean {
 
         val usernameResult = validateUserName.execute(state.userName)
         val emailResult = validateEmail.execute(state.email)
@@ -56,7 +46,7 @@ class RegisterViewModel @Inject constructor(
 
         state = state.copy(
             userNameError = usernameResult.errorMessage,
-            emailError =  emailResult.errorMessage,
+            emailError = emailResult.errorMessage,
             passwordError = passwordResult.errorMessage,
             phoneNumberError = phoneResult.errorMessage,
         )
@@ -71,23 +61,25 @@ class RegisterViewModel @Inject constructor(
 
     }
 
-    fun addUserInfo(){
+    fun addUserInfo() {
         viewModelScope.launch {
-            val userInfo = UserInfo(userName = state.userName, email = state.email , phoneNumber = state.phoneNumber)
+            val userInfo = UserInfo(
+                userName = state.userName,
+                email = state.email,
+                phoneNumber = state.phoneNumber
+            )
             addUserInfoUseCase.execute(userInfo)
-           // navigateToCameraScreen.value = true
         }
 
     }
 
-    private fun saveImage(image : ByteArray){
+    private fun saveImage(image: ByteArray) {
         viewModelScope.launch {
             val lastItem = getLastUserInfoUseCase.execute()
-            Timber.e("lastItem $lastItem")
             val userItem = lastItem.copy(image = image)
             Timber.e("userItem $userItem")
 
-           val id =  updateUserInfoUseCase.execute(userItem)
+            val id = updateUserInfoUseCase.execute(userItem)
             Timber.e("update id $id")
             closeApp.value = true
         }
