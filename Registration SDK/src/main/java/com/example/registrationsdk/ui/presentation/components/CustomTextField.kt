@@ -1,6 +1,5 @@
 package com.example.registrationsdk.ui.presentation.components
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.defaultMinSize
@@ -9,9 +8,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.text.selection.LocalTextSelectionColors
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -33,8 +32,6 @@ import androidx.compose.ui.unit.sp
 import com.example.registrationsdk.R
 
 
-@OptIn(ExperimentalMaterial3Api::class)
-@SuppressLint("Range")
 @Composable
 fun CustomTextField(
     fieldMutable: MutableState<String>,
@@ -70,7 +67,7 @@ fun CustomTextField(
             keyboardActions = keyBoardAction,
             keyboardOptions = KeyboardOptions(
                 capitalization = KeyboardCapitalization.None,
-                autoCorrect = true,
+                autoCorrectEnabled = true,
                 keyboardType = KeyboardType.Text,
                 imeAction = ImeAction.Next
             ),
@@ -92,13 +89,15 @@ fun CustomTextField(
             shape = RoundedCornerShape(6.dp),
             singleLine = true,
 
-            colors = TextFieldDefaults.textFieldColors(
+            colors = TextFieldDefaults.colors(
                 disabledTextColor = Color.Transparent,
+                cursorColor = Color.White,
+                selectionColors = LocalTextSelectionColors.current,
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent,
                 disabledIndicatorColor = Color.Transparent,
-                cursorColor = Color.White,
-            )
+
+                )
         )
 
         if (fieldErrorMutable.value.isNotEmpty()) {
