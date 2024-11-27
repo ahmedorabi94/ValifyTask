@@ -96,10 +96,21 @@ afterEvaluate {
             create<MavenPublication>("maven") {
                 from (components["release"])
                 groupId = "com.github.ahmedorabi94"
-                artifactId = "ValifyTask"
-                version = "1.0.1"
+                artifactId = "RegistrationSDK"
+                version = "1.0.2"
             }
         }
     }
 }
+
+//publishing {
+//    publications {
+//        create<MavenPublication>("release") {
+//            from(components["release"])
+//            groupId = "com.github.ahmedorabi94"
+//            artifactId = "Registration SDK"
+//            version = "1.0.1"
+//        }
+//    }
+//}
 
