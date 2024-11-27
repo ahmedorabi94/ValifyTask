@@ -90,14 +90,28 @@ dependencies {
     implementation(libs.androidx.camera.core)
 }
 
-afterEvaluate {
-    publishing {
-        publications {
-            create<MavenPublication>("maven") {
-                from (components["release"])
-                groupId = "com.github.ahmedorabi94"
-                artifactId = "RegistrationSDK"
-                version = "1.0.2"
+//afterEvaluate {
+//    publishing {
+//        publications {
+//            create<MavenPublication>("maven") {
+//                from (components["release"])
+//                groupId = "com.github.ahmedorabi94"
+//                artifactId = "RegistrationSDK"
+//                version = "1.0.2"
+//            }
+//        }
+//    }
+//}
+
+publishing {
+    publications {
+        register<MavenPublication>("release") {
+            groupId = "com.github.ahmedorabi94"
+            artifactId = "ValifyTask"
+            version = "1.0.3"
+
+            afterEvaluate {
+                from(components["release"])
             }
         }
     }
