@@ -5,8 +5,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.valifytask.presentation.CaptureImageScreen
-import com.example.valifytask.presentation.RegistrationScreen
+import com.example.valifytask.ui.presentation.screens.CaptureImageScreen
+import com.example.valifytask.ui.presentation.screens.RegistrationScreen
 
 enum class Screen {
     REGISTER,

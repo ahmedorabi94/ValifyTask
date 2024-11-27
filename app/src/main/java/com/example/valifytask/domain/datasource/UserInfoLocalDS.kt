@@ -1,6 +1,6 @@
-package com.example.valifytask.domain
+package com.example.valifytask.domain.datasource
 
-import com.example.valifytask.db.UserInfo
+import com.example.valifytask.data.db.UserInfo
 
 interface UserInfoLocalDS {
 

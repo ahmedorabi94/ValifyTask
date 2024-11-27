@@ -1,4 +1,4 @@
-package com.example.valifytask.presentation
+package com.example.valifytask.ui.presentation.screens
 
 import android.app.Activity
 import android.content.Context
@@ -29,6 +29,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
+import com.example.valifytask.ui.presentation.RegisterViewModel
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.face.FaceDetection
 import com.google.mlkit.vision.face.FaceDetectorOptions

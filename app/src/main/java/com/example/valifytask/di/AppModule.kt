@@ -1,7 +1,7 @@
 package com.example.valifytask.di
 
-import com.example.valifytask.domain.UserInfoLocalDS
-import com.example.valifytask.domain.UserInfoLocalDSImpl
+import com.example.valifytask.domain.datasource.UserInfoLocalDS
+import com.example.valifytask.data.repo.UserInfoLocalDSImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

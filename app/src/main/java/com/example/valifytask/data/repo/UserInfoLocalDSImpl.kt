@@ -1,7 +1,8 @@
-package com.example.valifytask.domain
+package com.example.valifytask.data.repo
 
-import com.example.valifytask.db.UserInfo
-import com.example.valifytask.db.UserInfoDao
+import com.example.valifytask.data.db.UserInfo
+import com.example.valifytask.data.db.UserInfoDao
+import com.example.valifytask.domain.datasource.UserInfoLocalDS
 import javax.inject.Inject
 
 class UserInfoLocalDSImpl @Inject constructor(private val userInfoDao: UserInfoDao) :

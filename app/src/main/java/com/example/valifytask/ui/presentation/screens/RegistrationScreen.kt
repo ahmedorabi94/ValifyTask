@@ -1,4 +1,4 @@
-package com.example.valifytask.presentation
+package com.example.valifytask.ui.presentation.screens
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -33,6 +33,8 @@ import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.valifytask.navigation.NavigationItem
+import com.example.valifytask.ui.presentation.RegisterViewModel
+import com.example.valifytask.ui.presentation.components.CustomTextField
 
 
 @Preview(showBackground = true)

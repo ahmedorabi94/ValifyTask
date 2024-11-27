@@ -1,4 +1,4 @@
-package com.example.valifytask.validation
+package com.example.valifytask.domain.validation
 
 import android.util.Patterns
 

@@ -1,7 +1,7 @@
-package com.example.valifytask.use_cases
+package com.example.valifytask.domain.use_cases
 
-import com.example.valifytask.db.UserInfo
-import com.example.valifytask.domain.UserInfoLocalDS
+import com.example.valifytask.data.db.UserInfo
+import com.example.valifytask.domain.datasource.UserInfoLocalDS
 import javax.inject.Inject
 
 class AddUserInfoUseCase  @Inject constructor(

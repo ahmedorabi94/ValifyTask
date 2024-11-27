@@ -1,4 +1,4 @@
-package com.example.valifytask.db
+package com.example.valifytask.data.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

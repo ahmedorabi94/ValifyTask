@@ -1,4 +1,4 @@
-package com.example.valifytask.presentation
+package com.example.valifytask.ui.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

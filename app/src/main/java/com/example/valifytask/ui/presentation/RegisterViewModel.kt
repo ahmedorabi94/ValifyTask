@@ -1,17 +1,17 @@
-package com.example.valifytask.presentation
+package com.example.valifytask.ui.presentation
 
 import android.graphics.Bitmap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.valifytask.db.UserInfo
-import com.example.valifytask.use_cases.AddUserInfoUseCase
-import com.example.valifytask.use_cases.GetLastUserInfoUseCase
-import com.example.valifytask.use_cases.UpdateUserInfoUseCase
-import com.example.valifytask.validation.RegisterScreenState
-import com.example.valifytask.validation.ValidateEmail
-import com.example.valifytask.validation.ValidatePassword
-import com.example.valifytask.validation.ValidatePhone
-import com.example.valifytask.validation.ValidateUserName
+import com.example.valifytask.data.db.UserInfo
+import com.example.valifytask.domain.use_cases.AddUserInfoUseCase
+import com.example.valifytask.domain.use_cases.GetLastUserInfoUseCase
+import com.example.valifytask.domain.use_cases.UpdateUserInfoUseCase
+import com.example.valifytask.domain.validation.RegisterScreenState
+import com.example.valifytask.domain.validation.ValidateEmail
+import com.example.valifytask.domain.validation.ValidatePassword
+import com.example.valifytask.domain.validation.ValidatePhone
+import com.example.valifytask.domain.validation.ValidateUserName
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch

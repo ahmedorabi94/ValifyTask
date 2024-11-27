@@ -2,8 +2,8 @@ package com.example.valifytask.di
 
 import android.app.Application
 import androidx.room.Room
-import com.example.valifytask.db.AppDatabase
-import com.example.valifytask.db.UserInfoDao
+import com.example.valifytask.data.db.AppDatabase
+import com.example.valifytask.data.db.UserInfoDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

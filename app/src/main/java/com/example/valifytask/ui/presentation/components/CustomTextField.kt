@@ -1,4 +1,4 @@
-package com.example.valifytask.presentation
+package com.example.valifytask.ui.presentation.components
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.border
