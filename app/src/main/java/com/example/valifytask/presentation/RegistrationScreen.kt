@@ -46,8 +46,6 @@ fun RegistrationScreen(
     val localFocusManager = LocalFocusManager.current
     val context = LocalContext.current
 
-    //val navigateToCameraScreen = registerViewModel.navigateToCameraScreen.collectAsStateWithLifecycle().value
-
 
     val usernameMutable = remember { mutableStateOf("") }
     val phoneNumberMutable = remember { mutableStateOf("") }
@@ -167,7 +165,7 @@ fun RegistrationScreen(
                 contentColor = Color.Black, containerColor = Color.White
             ), modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 30.dp, start = 12.dp, end = 12.dp)
+                .padding(top = 30.dp, start = 30.dp, end = 30.dp)
         ) {
             Text(
                 text = "Save",

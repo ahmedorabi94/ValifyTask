@@ -11,15 +11,17 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
-import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
@@ -31,6 +33,7 @@ import androidx.compose.ui.unit.sp
 import com.example.valifytask.R
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("Range")
 @Composable
 fun CustomTextField(
@@ -38,12 +41,10 @@ fun CustomTextField(
     fieldErrorMutable: MutableState<String>,
     keyBoardAction: KeyboardActions,
     hintStr: String,
-    onChanged : (String) -> Unit,
-    cursorColor: String = "",
+    onChanged: (String) -> Unit,
     paddingHorizontal: Int = 16
 ) {
 
-    val localFocusManager = LocalFocusManager.current
 
     Column(modifier = Modifier.padding(start = paddingHorizontal.dp, end = paddingHorizontal.dp)) {
 
@@ -84,14 +85,21 @@ fun CustomTextField(
                 )
                 .scale(scaleY = 0.9F, scaleX = 1F),
             textStyle = TextStyle(
-                color = colorResource(id = R.color.black),
+                color = colorResource(id = R.color.white),
                 fontSize = 17.sp,
                 fontFamily = FontFamily.SansSerif
             ),
             shape = RoundedCornerShape(6.dp),
             singleLine = true,
 
+            colors = TextFieldDefaults.textFieldColors(
+                disabledTextColor = Color.Transparent,
+                focusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent,
+                disabledIndicatorColor = Color.Transparent,
+                cursorColor = Color.White,
             )
+        )
 
         if (fieldErrorMutable.value.isNotEmpty()) {
             Text(

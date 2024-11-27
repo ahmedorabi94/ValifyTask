@@ -4,10 +4,10 @@ package com.example.valifytask.validation
 class ValidateUserName {
 
     fun execute(username: String): ValidationResult {
-        if (username.isBlank()) {
+        if (username.isBlank()  || username.length < 8) {
             return ValidationResult(
                 successful = false,
-                errorMessage = "The userame can't be blank"
+                errorMessage = "The userame can't be blank and less than 8 characters"
             )
         }
 
