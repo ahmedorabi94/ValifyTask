@@ -46,17 +46,9 @@ android {
 //            withJavadocJar()
 //        }
 //    }
+
 }
 
-publishing {
-    publications {
-        register<MavenPublication>("release") {
-            afterEvaluate {
-                from(components["release"])
-            }
-        }
-    }
-}
 dependencies {
 
     implementation(libs.androidx.core.ktx)
@@ -180,4 +172,15 @@ dependencies {
 //        }
 //    }
 //}
-
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("release") {
+                from(components.findByName("release"))
+//                groupId = "com.github.ahmedorabi94"
+//                artifactId = "ValifyTask"
+//                version = "0.0.10"
+            }
+        }
+    }
+}
