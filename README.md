@@ -1,8 +1,9 @@
 [![](https://jitpack.io/v/ahmedorabi94/ValifyTask.svg)](https://jitpack.io/#ahmedorabi94/ValifyTask)
 
 
-How to use
+## How to use
 
+```
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -14,4 +15,15 @@ dependencyResolutionManagement {
     }
 }
 
+
 implementation("com.github.ahmedorabi94:ValifyTask:0.0.16")
+
+Then in your app module
+
+@HiltAndroidApp
+class BasicApp : Application()
+
+ startActivity(Intent(this,RegisterActivity::class.java))
+ finish()
+
+```
