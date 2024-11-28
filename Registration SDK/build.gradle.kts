@@ -39,6 +39,13 @@ android {
     room {
         schemaDirectory("$projectDir/schemas")
     }
+
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
 }
 
 dependencies {
@@ -105,22 +112,40 @@ dependencies {
 
 publishing {
     publications {
-        create<MavenPublication>("release") {
+        register<MavenPublication>("release") {
             groupId = "com.github.ahmedorabi94"
             artifactId = "ValifyTask"
-            version = "1.0.0"
+            version = "0.0.6"
 
-            from(components.findByName("release"))
-           // from components.findByName('release')
-        }
-    }
-    repositories {
-        maven {
-            name = "releases"
-            url = uri("https://jitpack.io")
+            afterEvaluate {
+                from(components["release"])
+            }
         }
     }
 }
+
+
+//publishing {
+//    publications {
+//        create("maven-public", MavenPublication::class)  {
+//            groupId = "com.github.ahmedorabi94"
+//            artifactId = "ValifyTask"
+//            version = "0.0.6"
+//
+//          //  from(components["release"])
+//           // from(components.findByName("release"))
+//           // from(components.getByName(""))
+//          //  from components.java
+//           // from components.findByName('release')
+//        }
+//    }
+////    repositories {
+////        maven {
+////            name = "releases"
+////            url = uri("https://jitpack.io")
+////        }
+////    }
+//}
 
 //publishing {
 //    publications {

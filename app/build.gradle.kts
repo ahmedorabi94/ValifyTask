@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     id("com.google.dagger.hilt.android")
     id("kotlin-kapt")
+    id("maven-publish")
 }
 
 android {
@@ -39,6 +40,13 @@ android {
     buildFeatures {
         compose = true
     }
+
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
 }
 
 dependencies {
@@ -55,4 +63,39 @@ dependencies {
     implementation(libs.androidx.hilt.navigation.compose)
 
 
+}
+
+//publishing {
+//    publications {
+//        create("maven-public", MavenPublication::class)  {
+//            groupId = "com.github.ahmedorabi94"
+//            artifactId = "ValifyTask"
+//            version = "0.0.6"
+//
+//            // from(components.findByName("release"))
+//            from(components.getByName("java"))
+//            // from components.findByName('release')
+//        }
+//    }
+////    repositories {
+////        maven {
+////            name = "releases"
+////            url = uri("https://jitpack.io")
+////        }
+////    }
+//}
+
+
+publishing {
+    publications {
+        register<MavenPublication>("release") {
+            groupId = "com.github.ahmedorabi94"
+            artifactId = "ValifyTask"
+            version = "0.0.6"
+
+            afterEvaluate {
+                from(components["release"])
+            }
+        }
+    }
 }
