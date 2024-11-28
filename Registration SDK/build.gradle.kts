@@ -40,12 +40,12 @@ android {
         schemaDirectory("$projectDir/schemas")
     }
 
-//    publishing {
-//        singleVariant("release") {
-//            withSourcesJar()
-//            withJavadocJar()
-//        }
-//    }
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
 
 }
 
@@ -111,19 +111,19 @@ dependencies {
 //    }
 //}
 
-//publishing {
-//    publications {
-//        register<MavenPublication>("release") {
-////            groupId = "com.github.ahmedorabi94"
-////            artifactId = "ValifyTask"
-////            version = "0.0.6"
-//
-//            afterEvaluate {
-//                from(components["release"])
-//            }
-//        }
-//    }
-//}
+publishing {
+    publications {
+        register<MavenPublication>("release") {
+//            groupId = "com.github.ahmedorabi94"
+//            artifactId = "ValifyTask"
+//            version = "0.0.6"
+
+            afterEvaluate {
+                from(components["release"])
+            }
+        }
+    }
+}
 
 
 //publishing {
