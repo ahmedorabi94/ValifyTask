@@ -41,12 +41,6 @@ android {
         compose = true
     }
 
-//    publishing {
-//        singleVariant("release") {
-//            withSourcesJar()
-//            withJavadocJar()
-//        }
-//    }
 
 }
 
@@ -67,82 +61,3 @@ dependencies {
     implementation("com.github.ahmedorabi94:ValifyTask:0.0.16")
 
 }
-
-//publishing {
-//    publications {
-//        create("maven-public", MavenPublication::class)  {
-//            groupId = "com.github.ahmedorabi94"
-//            artifactId = "ValifyTask"
-//            version = "0.0.6"
-//
-//            // from(components.findByName("release"))
-//            from(components.getByName("java"))
-//            // from components.findByName('release')
-//        }
-//    }
-////    repositories {
-////        maven {
-////            name = "releases"
-////            url = uri("https://jitpack.io")
-////        }
-////    }
-//}
-
-
-//publishing {
-//    publications {
-//        register<MavenPublication>("release") {
-//            groupId = "com.github.ahmedorabi94"
-//            artifactId = "ValifyTask"
-//            version = "0.0.9"
-//
-//            afterEvaluate {
-//                from(components["release"])
-//            }
-//        }
-//    }
-//}
-//publishing {
-//    publications {
-//        create<MavenPublication>("release") {
-//            from(components["release"])
-//            groupId = "com.github.ahmedorabi94"
-//            artifactId = "ValifyTask"
-//            version = "0.0.9"
-//        }
-//    }
-//}
-//publishing {
-//    publications {
-//        create("maven-public", MavenPublication::class) {
-//            groupId = "com.github.ahmedorabi94"
-//            artifactId = "ValifyTask"
-//            version = "0.0.8"
-//            from(components.findByName("java"))
-//        }
-//    }
-//}
-
-//afterEvaluate {
-//    publishing {
-//        publications {
-//            create<MavenPublication>("release") {
-//                from(components.findByName("release"))
-////                groupId = "com.github.ahmedorabi94"
-////                artifactId = "ValifyTask"
-////                version = "0.0.10"
-//            }
-//        }
-//    }
-//}
-
-
-//afterEvaluate {
-//    publishing {
-//        publications {
-//            release(MavenPublication) {
-//                from components.release
-//            }
-//        }
-//    }
-//}

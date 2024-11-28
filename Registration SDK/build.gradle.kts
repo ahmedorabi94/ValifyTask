@@ -98,18 +98,6 @@ dependencies {
     implementation(libs.androidx.camera.core)
 }
 
-//afterEvaluate {
-//    publishing {
-//        publications {
-//            create<MavenPublication>("release") {
-//                from (components["release"])
-//                groupId = "com.github.ahmedorabi94"
-//                artifactId = "ValifyTask"
-//                version = "1.0.4"
-//            }
-//        }
-//    }
-//}
 
 publishing {
     publications {
@@ -124,63 +112,3 @@ publishing {
         }
     }
 }
-
-
-//publishing {
-//    publications {
-//        create("maven-public", MavenPublication::class)  {
-//            groupId = "com.github.ahmedorabi94"
-//            artifactId = "ValifyTask"
-//            version = "0.0.6"
-//
-//          //  from(components["release"])
-//           // from(components.findByName("release"))
-//           // from(components.getByName(""))
-//          //  from components.java
-//           // from components.findByName('release')
-//        }
-//    }
-////    repositories {
-////        maven {
-////            name = "releases"
-////            url = uri("https://jitpack.io")
-////        }
-////    }
-//}
-
-//publishing {
-//    publications {
-//        register<MavenPublication>("release") {
-//            groupId = "com.github.ahmedorabi94"
-//            artifactId = "ValifyTask"
-//            version = "1.0.3"
-//
-//            afterEvaluate {
-//                from(components["release"])
-//            }
-//        }
-//    }
-//}
-
-//publishing {
-//    publications {
-//        create<MavenPublication>("release") {
-//            from(components["release"])
-//            groupId = "com.github.ahmedorabi94"
-//            artifactId = "Registration SDK"
-//            version = "1.0.1"
-//        }
-//    }
-//}
-//afterEvaluate {
-//    publishing {
-//        publications {
-//            create<MavenPublication>("release") {
-//                from(components.findByName("release"))
-////                groupId = "com.github.ahmedorabi94"
-////                artifactId = "ValifyTask"
-////                version = "0.0.10"
-//            }
-//        }
-//    }
-//}
