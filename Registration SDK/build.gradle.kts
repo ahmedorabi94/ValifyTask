@@ -48,6 +48,15 @@ android {
 //    }
 }
 
+publishing {
+    publications {
+        register<MavenPublication>("release") {
+            afterEvaluate {
+                from(components["release"])
+            }
+        }
+    }
+}
 dependencies {
 
     implementation(libs.androidx.core.ktx)
@@ -113,9 +122,9 @@ dependencies {
 //publishing {
 //    publications {
 //        register<MavenPublication>("release") {
-//            groupId = "com.github.ahmedorabi94"
-//            artifactId = "ValifyTask"
-//            version = "0.0.6"
+////            groupId = "com.github.ahmedorabi94"
+////            artifactId = "ValifyTask"
+////            version = "0.0.6"
 //
 //            afterEvaluate {
 //                from(components["release"])
