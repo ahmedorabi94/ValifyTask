@@ -90,15 +90,34 @@ dependencies {
     implementation(libs.androidx.camera.core)
 }
 
-afterEvaluate {
-    publishing {
-        publications {
-            create<MavenPublication>("release") {
-                from (components["release"])
-                groupId = "com.github.ahmedorabi94"
-                artifactId = "ValifyTask"
-                version = "1.0.4"
-            }
+//afterEvaluate {
+//    publishing {
+//        publications {
+//            create<MavenPublication>("release") {
+//                from (components["release"])
+//                groupId = "com.github.ahmedorabi94"
+//                artifactId = "ValifyTask"
+//                version = "1.0.4"
+//            }
+//        }
+//    }
+//}
+
+publishing {
+    publications {
+        create<MavenPublication>("release") {
+            groupId = "com.github.ahmedorabi94"
+            artifactId = "ValifyTask"
+            version = "1.0.0"
+
+            from(components.findByName("release"))
+           // from components.findByName('release')
+        }
+    }
+    repositories {
+        maven {
+            name = "releases"
+            url = uri("https://jitpack.io")
         }
     }
 }
