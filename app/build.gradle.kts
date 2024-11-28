@@ -62,6 +62,7 @@ dependencies {
     kapt(libs.hilt.android.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
 
+   // implementation("com.github.ahmedorabi94:ValifyTask:0.0.8")
 
 }
 
@@ -91,7 +92,7 @@ dependencies {
 //        register<MavenPublication>("release") {
 //            groupId = "com.github.ahmedorabi94"
 //            artifactId = "ValifyTask"
-//            version = "0.0.6"
+//            version = "0.0.9"
 //
 //            afterEvaluate {
 //                from(components["release"])
@@ -99,13 +100,36 @@ dependencies {
 //        }
 //    }
 //}
-publishing {
-    publications {
-        create("maven-public", MavenPublication::class) {
-            groupId = "com.github.ahmedorabi94"
-            artifactId = "ValifyTask"
-            version = "0.0.8"
-            from(components.findByName("java"))
+//publishing {
+//    publications {
+//        create<MavenPublication>("release") {
+//            from(components["release"])
+//            groupId = "com.github.ahmedorabi94"
+//            artifactId = "ValifyTask"
+//            version = "0.0.9"
+//        }
+//    }
+//}
+//publishing {
+//    publications {
+//        create("maven-public", MavenPublication::class) {
+//            groupId = "com.github.ahmedorabi94"
+//            artifactId = "ValifyTask"
+//            version = "0.0.8"
+//            from(components.findByName("java"))
+//        }
+//    }
+//}
+
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("release") {
+                from(components.findByName("release"))
+                groupId = "com.github.ahmedorabi94"
+                artifactId = "ValifyTask"
+                version = "0.0.10"
+            }
         }
     }
 }
