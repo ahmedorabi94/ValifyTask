@@ -32,4 +32,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "ValifyTask"
 include(":app")
-include(":Registration SDK")
+//include(":Registration SDK")

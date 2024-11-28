@@ -3,7 +3,7 @@ package com.example.valifytask
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-//import com.example.registrationsdk.ui.presentation.RegisterActivity
+import com.example.registrationsdk.ui.presentation.RegisterActivity
 
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -13,10 +13,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
 
-
-
-
-        //startActivity(Intent(this,RegisterActivity::class.java))
+        startActivity(Intent(this,RegisterActivity::class.java))
         finish()
     }
 }
