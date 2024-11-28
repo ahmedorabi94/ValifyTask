@@ -14,6 +14,8 @@ class MainActivity : ComponentActivity() {
 
 
 
+
+
         //startActivity(Intent(this,RegisterActivity::class.java))
         finish()
     }

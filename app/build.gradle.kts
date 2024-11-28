@@ -52,7 +52,7 @@ android {
 
 
 dependencies {
-    //implementation(project(":Registration SDK"))
+    implementation(project(":Registration SDK"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
 
@@ -64,7 +64,7 @@ dependencies {
     kapt(libs.hilt.android.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
 
-   // implementation("com.github.ahmedorabi94:ValifyTask:0.0.10")
+  //  implementation("com.github.ahmedorabi94:ValifyTask:0.0.12")
 
 }
 
@@ -123,18 +123,18 @@ dependencies {
 //    }
 //}
 
-afterEvaluate {
-    publishing {
-        publications {
-            create<MavenPublication>("release") {
-                from(components.findByName("release"))
-//                groupId = "com.github.ahmedorabi94"
-//                artifactId = "ValifyTask"
-//                version = "0.0.10"
-            }
-        }
-    }
-}
+//afterEvaluate {
+//    publishing {
+//        publications {
+//            create<MavenPublication>("release") {
+//                from(components.findByName("release"))
+////                groupId = "com.github.ahmedorabi94"
+////                artifactId = "ValifyTask"
+////                version = "0.0.10"
+//            }
+//        }
+//    }
+//}
 
 
 //afterEvaluate {

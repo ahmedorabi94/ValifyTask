@@ -12,6 +12,9 @@ pluginManagement {
 //        maven {
 //            url = uri("https://jitpack.io")
 //        }
+        maven {
+            url = uri("https://www.jitpack.io")
+        }
     }
 }
 dependencyResolutionManagement {
@@ -20,11 +23,13 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven {
-            url = uri("https://jitpack.io")
+            url = uri("https://www.jitpack.io")
         }
+      //  maven { url = uri("https://maven.scijava.org/content/repositories/public/") }
+
     }
 }
 
 rootProject.name = "ValifyTask"
 include(":app")
-//include(":Registration SDK")
+include(":Registration SDK")
