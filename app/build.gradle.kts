@@ -99,3 +99,13 @@ dependencies {
 //        }
 //    }
 //}
+publishing {
+    publications {
+        create("maven-public", MavenPublication::class) {
+            groupId = "com.github.ahmedorabi94"
+            artifactId = "ValifyTask"
+            version = "0.0.8"
+            from(components.findByName("java"))
+        }
+    }
+}
