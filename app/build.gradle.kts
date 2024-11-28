@@ -123,18 +123,18 @@ dependencies {
 //    }
 //}
 
-//afterEvaluate {
-//    publishing {
-//        publications {
-//            create<MavenPublication>("release") {
-//                from(components.findByName("release"))
-////                groupId = "com.github.ahmedorabi94"
-////                artifactId = "ValifyTask"
-////                version = "0.0.10"
-//            }
-//        }
-//    }
-//}
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("release") {
+                from(components.findByName("release"))
+//                groupId = "com.github.ahmedorabi94"
+//                artifactId = "ValifyTask"
+//                version = "0.0.10"
+            }
+        }
+    }
+}
 
 
 //afterEvaluate {
