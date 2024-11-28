@@ -114,9 +114,9 @@ dependencies {
 publishing {
     publications {
         register<MavenPublication>("release") {
-//            groupId = "com.github.ahmedorabi94"
-//            artifactId = "ValifyTask"
-//            version = "0.0.6"
+            groupId = "com.github.ahmedorabi94"
+            artifactId = "ValifyTask"
+            version = "0.0.16"
 
             afterEvaluate {
                 from(components["release"])
